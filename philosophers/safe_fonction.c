@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   safe_fonction.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehdi <mehdi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mmouaffa <mmouaffa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 11:53:44 by mehdi             #+#    #+#             */
-/*   Updated: 2025/01/11 12:28:45 by mehdi            ###   ########.fr       */
+/*   Updated: 2025/01/14 15:09:48 by mmouaffa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	safe_malloc(size_t bytes)
+void	*safe_malloc(size_t bytes)
 {
 	void	*ret;
 
@@ -50,7 +50,7 @@ void	safe_mutex_handle(t_mtx *mutex, t_opcode opcode)
 	else if (DESTROY == opcode)
 		handle_mutex_error(pthread_mutex_destroy(mutex), opcode);
 	else if (INIT == opcode)
-		handle_mutex_error(pthread_mutex_init(mutex), opcode);
+		handle_mutex_error(pthread_mutex_init(mutex, NULL), opcode);
 	else
 		error_exit("probleme avec le mutex");
 }
@@ -75,11 +75,11 @@ void	safe_thread_handle(pthread_t *thread, void *(*foo)(void *),
 		void *data, t_opcode opcode)
 {
 	if (CREATE == opcode)
-		handle_thread_error(pthread_(thread, NULL, foo, data), opcode);
+		handle_thread_error(pthread_create(thread, NULL, foo, data), opcode);
 	else if (JOIN == opcode)
-		handle_thread_error(pthread_(*thread, NULL), opcode);
+		handle_thread_error(pthread_join(*thread, NULL), opcode);
 	else if (DETACH == opcode)
-		handle_thread_error(pthread_((*thread), opcode));
+		handle_thread_error(pthread_detach((*thread)), opcode);
 	else
 		error_exit("probleme avec les threads");
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehdi <mehdi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mmouaffa <mmouaffa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 18:28:08 by mehdi             #+#    #+#             */
-/*   Updated: 2025/01/11 11:48:47 by mehdi            ###   ########.fr       */
+/*   Updated: 2025/01/14 11:54:21 by mmouaffa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static inline bool	is_space(char c)
 {
-	return (c >= 9 && c <= 13 || c == 32)
+	return ((c >= 9 && c <= 13) || c == 32);
 }
 
 static inline bool	is_digit(char c)
@@ -22,10 +22,10 @@ static inline bool	is_digit(char c)
 	return (c >= '0' && c <= '9');
 }
 
-static const char	valid_input(const char *str)
+static const char	*valid_input(const char *str)
 {
-	int			len;
-	const char	*number;
+	int		len;
+	char	*number;
 	
 	len = 0;
 	while (is_space(*str))
@@ -36,12 +36,12 @@ static const char	valid_input(const char *str)
 		error_exit("valeurs négatives interdites");
 	if (!is_digit(*str))
 		error_exit("les valeurs doivent être des chiffres");
-	number = *str;
+	number = (char *)str;
 	while (*str++)
 		len++;
 	if (len > 10)
 		error_exit("la limite est INT_MAX");
-	return (number);
+	return ((const char *)number);
 }
 
 static long	ft_atol(const char *str)
@@ -68,7 +68,7 @@ void	parse_input(t_table *table, char **av)
 		|| table->time_to_sleep < 6e4)
 		error_exit("les valeurs doivent dépasser 60ms");
 	if (av[5])
-		table->nbr_limits_meals = ft_atol(av[5]);
+		table->nbr_limit_meals = ft_atol(av[5]);
 	else
-		table->nbr_limits_meals = -1;
+		table->nbr_limit_meals = -1;
 }
