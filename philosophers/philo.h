@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmouaffa <mmouaffa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mehdi <mehdi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 17:26:26 by mehdi             #+#    #+#             */
-/*   Updated: 2025/01/14 14:59:06 by mmouaffa         ###   ########.fr       */
+/*   Updated: 2025/01/15 14:07:59 by mehdi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef pthread_mutex_t	t_mtx;
 typedef struct s_table t_table;
 typedef struct s_philo t_philo;
 // **write_function_macro**
-# define DEBUG_MODE 0
+# define DEBUG_MODE 1
 
 typedef enum s_opcode
 {

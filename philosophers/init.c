@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmouaffa <mmouaffa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mehdi <mehdi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 10:51:11 by mmouaffa          #+#    #+#             */
-/*   Updated: 2025/01/14 13:35:04 by mmouaffa         ###   ########.fr       */
+/*   Updated: 2025/01/15 14:39:16 by mehdi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static void	assign_forks(t_philo *philo, t_fork *forks, int pos)
 {
 	int	philo_nbr;
 	
+	if (philo->table == NULL)
+		error_exit("probleme dans init");
 	philo_nbr = philo->table->philo_nbr;
 	if (philo->id % 2 == 0)
 	{
@@ -37,7 +39,7 @@ static void	philo_init(t_table *table)
 	i = -1;
 	while (++i < table->philo_nbr)
 	{
-		philo = table->philos;
+		philo = &table->philos[i];
 		philo->id = i + 1;
 		philo->full = false;
 		philo->meals_counter = 0;

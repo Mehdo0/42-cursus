@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmouaffa <mmouaffa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mehdi <mehdi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 18:28:08 by mehdi             #+#    #+#             */
-/*   Updated: 2025/01/14 11:54:21 by mmouaffa         ###   ########.fr       */
+/*   Updated: 2025/01/15 14:40:27 by mehdi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,11 @@ static long	ft_atol(const char *str)
 
 void	parse_input(t_table *table, char **av)
 {
-	table->philo_nbr = ft_atol(av[1]) * 1e3;
+	table->philo_nbr = ft_atol(av[1]);
 	table->time_to_die = ft_atol(av[2]) * 1e3;
 	table->time_to_eat = ft_atol(av[3]) * 1e3;
 	table->time_to_sleep = ft_atol(av[4]) * 1e3;
+	printf("%ld", table->philo_nbr);
 	if (table->time_to_die < 6e4
 		|| table->time_to_eat < 6e4
 		|| table->time_to_sleep < 6e4)

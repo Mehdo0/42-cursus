@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitoring.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmouaffa <mmouaffa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mehdi <mehdi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 13:08:51 by mmouaffa          #+#    #+#             */
-/*   Updated: 2025/01/14 15:11:39 by mmouaffa         ###   ########.fr       */
+/*   Updated: 2025/01/15 15:15:24 by mehdi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@ static bool	philo_died(t_philo *philo)
 		return (false);
 	elapsed = gettime(MILLISECOND) - get_long(&philo->philo_mutex
 			, &philo->last_meal_time);
+	if (!philo || !philo->table)
+        error_exit("Pointeur philo ou table non valide");
 	t_to_die = philo->table->time_to_die;
-	if (elapsed > t_to_die)
+	if (elapsed >= t_to_die)
 		return (true);
 	return (false);
 }
