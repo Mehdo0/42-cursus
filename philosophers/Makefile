@@ -9,21 +9,21 @@
 
 NAME        := philo
 CC        := cc
-FLAGS    := -Wall -Wextra -Werror -g
+FLAGS    := -Wall -Wextra -Werror 
 ################################################################################
 #                                 PROGRAM'S SRCS                               #
 ################################################################################
 
-SRCS        :=      init.c \
-                          dinner.c \
+SRCS        :=      dinner.c \
                           getters_setters.c \
+                          init.c \
+                          main.c \
+                          monitoring.c \
+                          parsing.c \
+                          safe_fonction.c \
                           synchro_utils.c \
                           utils.c \
                           write.c \
-                          main.c \
-                          parsing.c \
-						  monitoring.c \
-                          safe_fonction.c \
                           
 OBJS        := $(SRCS:.c=.o)
 
@@ -61,3 +61,7 @@ fclean:		clean
 			@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)binary ✔️"
 
 re:			fclean all
+
+.PHONY:		all clean fclean re
+
+

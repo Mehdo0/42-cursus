@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   safe_fonction.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehdi <mehdi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mmouaffa <mmouaffa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 11:53:44 by mehdi             #+#    #+#             */
-/*   Updated: 2025/01/15 11:00:50 by mehdi            ###   ########.fr       */
+/*   Updated: 2025/01/16 11:11:36 by mmouaffa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	handle_mutex_error(int status, t_opcode opcode)
 	if (status == 0)
 		return ;
 	if (EINVAL == status && (LOCK == opcode
-		|| UNLOCK == opcode || DESTROY == opcode))
+			|| UNLOCK == opcode || DESTROY == opcode))
 		error_exit("valeur de mutex invalide");
 	else if (EINVAL == status && INIT == opcode)
 		error_exit("valeur de attr invalide");
@@ -44,7 +44,7 @@ static void	handle_mutex_error(int status, t_opcode opcode)
 void	safe_mutex_handle(t_mtx *mutex, t_opcode opcode)
 {
 	if (!mutex)
-    error_exit("pointeur de mutex est NULL");
+		error_exit("pointeur de mutex est NULL");
 	if (LOCK == opcode)
 		handle_mutex_error(pthread_mutex_lock(mutex), opcode);
 	else if (UNLOCK == opcode)
@@ -77,7 +77,7 @@ void	safe_thread_handle(pthread_t *thread, void *(*foo)(void *),
 		void *data, t_opcode opcode)
 {
 	if (!thread)
-    error_exit("pointeur de thread est NULL");
+		error_exit("pointeur de thread est NULL");
 	if (CREATE == opcode)
 		handle_thread_error(pthread_create(thread, NULL, foo, data), opcode);
 	else if (JOIN == opcode)

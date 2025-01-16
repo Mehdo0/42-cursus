@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehdi <mehdi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mmouaffa <mmouaffa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 17:26:26 by mehdi             #+#    #+#             */
-/*   Updated: 2025/01/15 14:07:59 by mehdi            ###   ########.fr       */
+/*   Updated: 2025/01/16 11:56:02 by mmouaffa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,19 @@
 # include <errno.h>
 
 typedef pthread_mutex_t	t_mtx;
-typedef struct s_table t_table;
-typedef struct s_philo t_philo;
+typedef struct s_table	t_table;
+typedef struct s_philo	t_philo;
 // **write_function_macro**
 # define DEBUG_MODE 1
+
+// Reset
+#define RESET "\033[0m"
+
+// Regular Colors
+#define RED	"\033[31m"
+#define GREEN "\033[32m"
+#define YELLOW "\033[33m"
+#define BLUE "\033[34m"
 
 typedef enum s_opcode
 {
@@ -54,15 +63,15 @@ typedef struct s_fork
 
 typedef struct s_table
 {
-	long    	philo_nbr;
-	long    	time_to_die;
-	long    	time_to_eat;
-	long    	time_to_sleep;
-	long    	nbr_limit_meals;
+	long		philo_nbr;
+	long		time_to_die;
+	long		time_to_eat;
+	long		time_to_sleep;
+	long		nbr_limit_meals;
 	long		threads_running_nbr;
-	long    	start_simulation;
-	bool    	end_simulation;
-	bool    	all_threads_ready;
+	long		start_simulation;
+	bool		end_simulation;
+	bool		all_threads_ready;
 	pthread_t	monitor;
 	t_mtx		table_mutex;
 	t_mtx		write_mutex;
@@ -70,7 +79,7 @@ typedef struct s_table
 	t_philo		*philos;
 }	t_table;
 
-typedef	enum	e_status
+typedef enum e_status
 {
 	EATING,
 	SLEEPING,
@@ -120,12 +129,14 @@ void	data_init(t_table *table);
 void	*safe_malloc(size_t bytes);
 void	safe_mutex_handle(t_mtx *mutex, t_opcode opcode);
 void	safe_thread_handle(pthread_t *thread, void *(*foo)(void *),
-		void *data, t_opcode opcode);
+			void *data, t_opcode opcode);
 
 // **synchro**
 void	wait_all_threads(t_table *table);
 void	increase_long(t_mtx *mutex, long *value);
 bool	all_threads_running(t_mtx *mutex, long *threads, long philo_nbr);
+void	thinking(t_philo *philo, bool pre_simulation);
+void	de_synchro_philo(t_philo *philo);
 
 // **write_status**
 void	write_status(t_philo_status status, t_philo *philo, bool debug);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehdi <mehdi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mmouaffa <mmouaffa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 10:51:11 by mmouaffa          #+#    #+#             */
-/*   Updated: 2025/01/15 14:39:16 by mehdi            ###   ########.fr       */
+/*   Updated: 2025/01/16 11:08:10 by mmouaffa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 static void	assign_forks(t_philo *philo, t_fork *forks, int pos)
 {
 	int	philo_nbr;
-	
+
 	if (philo->table == NULL)
 		error_exit("probleme dans init");
 	philo_nbr = philo->table->philo_nbr;
 	if (philo->id % 2 == 0)
 	{
 		philo->first_fork = &forks[pos];
-		philo->second_fork = &forks[(pos+ 1) % philo_nbr];
+		philo->second_fork = &forks[(pos + 1) % philo_nbr];
 	}
 	else
 	{

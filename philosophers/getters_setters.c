@@ -6,7 +6,7 @@
 /*   By: mmouaffa <mmouaffa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 11:58:01 by mmouaffa          #+#    #+#             */
-/*   Updated: 2025/01/14 10:20:10 by mmouaffa         ###   ########.fr       */
+/*   Updated: 2025/01/16 11:07:57 by mmouaffa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ bool	get_bool(t_mtx *mutex, bool *value)
 	safe_mutex_handle(mutex, LOCK);
 	ret = *value;
 	safe_mutex_handle(mutex, UNLOCK);
-	return(ret);
+	return (ret);
 }
 
 void	set_long(t_mtx *mutex, long *dest, long value)
@@ -43,7 +43,7 @@ long	get_long(t_mtx *mutex, long *value)
 	safe_mutex_handle(mutex, LOCK);
 	ret = *value;
 	safe_mutex_handle(mutex, UNLOCK);
-	return(ret);
+	return (ret);
 }
 
 bool	simulation_finished(t_table *table)

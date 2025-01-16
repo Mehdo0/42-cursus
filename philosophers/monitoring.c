@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitoring.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehdi <mehdi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mmouaffa <mmouaffa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 13:08:51 by mmouaffa          #+#    #+#             */
-/*   Updated: 2025/01/15 15:15:24 by mehdi            ###   ########.fr       */
+/*   Updated: 2025/01/16 11:31:13 by mmouaffa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,16 @@ static bool	philo_died(t_philo *philo)
 
 	if (get_bool(&philo->philo_mutex, &philo->full))
 		return (false);
-	elapsed = gettime(MILLISECOND) - get_long(&philo->philo_mutex
-			, &philo->last_meal_time);
 	if (!philo || !philo->table)
-        error_exit("Pointeur philo ou table non valide");
-	t_to_die = philo->table->time_to_die;
+		error_exit("Pointeur philo ou table non valide");
+	t_to_die = philo->table->time_to_die / 1000;
+	elapsed = gettime(MILLISECOND) - get_long(&philo->philo_mutex,
+			&philo->last_meal_time);
 	if (elapsed >= t_to_die)
+	{
+		write_status(DIED, philo, DEBUG_MODE);
 		return (true);
+	}
 	return (false);
 }
 
@@ -41,7 +44,7 @@ void	*monitor_dinner(void *data)
 	while (!simulation_finished(table))
 	{
 		i = -1;
-		while (i++ < table->philo_nbr && !simulation_finished(table))
+		while (++i < table->philo_nbr && !simulation_finished(table))
 		{
 			if (philo_died(table->philos + i))
 			{

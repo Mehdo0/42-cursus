@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehdi <mehdi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mmouaffa <mmouaffa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 12:45:37 by mmouaffa          #+#    #+#             */
-/*   Updated: 2025/01/15 17:18:26 by mehdi            ###   ########.fr       */
+/*   Updated: 2025/01/16 11:59:50 by mmouaffa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	error_exit(const char *str)
 {
-	printf("%s\n", str);
+	printf(RED"%s\n"RESET, str);
 	exit(EXIT_FAILURE);
 }
 
@@ -45,7 +45,7 @@ void	precise_usleep(long usec, t_table *table)
 	while (gettime(MICROSECOND) - start < usec)
 	{
 		if (simulation_finished(table))
-			break;
+			break ;
 		elapsed = gettime(MICROSECOND) - start;
 		rem = usec - elapsed;
 		if (rem > 1e3)
@@ -60,13 +60,13 @@ void	precise_usleep(long usec, t_table *table)
 
 void	clean(t_table *table)
 {
-	t_philo *philo;
+	t_philo	*philo;
 	int		i;
 
 	i = -1;
 	while (++i < table->philo_nbr)
 	{
-		philo= table ->philos + i;
+		philo = table ->philos + i;
 		safe_mutex_handle(&philo->philo_mutex, DESTROY);
 	}
 	safe_mutex_handle(&table->write_mutex, DESTROY);
